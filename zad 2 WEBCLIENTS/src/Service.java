@@ -20,6 +20,7 @@ import java.util.List;
 
 public class Service {
     private String countryName;
+    String apiKeyCity = "hUKP10ehg0Wym3U6vD+ndA==DcQ2EMsvbKWVWImu";
     private String appid = "27e4ffc1bbb33453a129db882817a834";
     private String urlWeather = "https://api.openweathermap.org/data/2.5/weather?lat=52.237049&lon=21.017532&units=metric&appid="+appid;
     private String urlCity = "http://api.openweathermap.org/geo/1.0/direct?q=warsaw&limit=5&appid="+appid;
@@ -29,6 +30,7 @@ public class Service {
     private String urlNBPb = "https://static.nbp.pl/dane/kursy/xml/b011z250319.xml";
     private String urlNBPc = "https://static.nbp.pl/dane/kursy/xml/c055z250320.xml";
     private String urlCountry;
+
 
     private Country country;
     private City city;
@@ -53,9 +55,11 @@ public class Service {
         listNBP.add(nbpRatesC);
 
     }
-    public Weather collectWeather() {
+    public Weather collectWeather(String cityName) {
+        City city = collectCity("http://api.openweathermap.org/geo/1.0/direct?q="+cityName+"&limit=5&appid="+appid);
+        String url = "https://api.openweathermap.org/data/2.5/weather?lat="+city.lat+"&lon="+city.lon+"&units=metric&appid="+appid;
         try (
-                InputStream urlConnection = new URL(urlWeather).openConnection().getInputStream();
+                InputStream urlConnection = new URL(url).openConnection().getInputStream();
                 BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection))
         ) {
             String inputLine = in.readLine();
@@ -125,8 +129,7 @@ public class Service {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
 
-            String apiKey = "hUKP10ehg0Wym3U6vD+ndA==DcQ2EMsvbKWVWImu";
-            connection.setRequestProperty("X-Api-Key", apiKey);
+            connection.setRequestProperty("X-Api-Key", apiKeyCity);
 
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
@@ -178,6 +181,10 @@ public class Service {
             }
         }
         return null;
+    }
+    public String getInfoWeather(String cityName){
+        Weather weather = collectWeather(cityName);
+        return String.valueOf(weather.main.temp);
     }
 }
 
