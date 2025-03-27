@@ -1,3 +1,5 @@
+package zad1;
+
 public class NBPEchangeRates {
     TabelaKursow tabela_kursow; // Zagnieżdżony obiekt "tabela_kursow"
 

@@ -1,3 +1,6 @@
+package zad1;
+
+
 import javax.swing.*;
 
 /**
@@ -16,5 +19,6 @@ public class Main {
     // ...
     // część uruchamiająca GUI
     SwingUtilities.invokeLater(() -> new MyFrame().setVisible(true));
+
   }
 }

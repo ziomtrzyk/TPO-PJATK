@@ -1,3 +1,5 @@
+package zad1;
+
 import com.google.gson.Gson;
 import org.json.JSONObject;
 import org.json.XML;
@@ -95,6 +97,7 @@ public class Service {
                 fullResponse+=inputLine;
                 inputLine = in.readLine();
             }
+
             return gson.fromJson(fullResponse, Currency.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -159,16 +162,11 @@ public class Service {
     }
     public Double getRateFor(String currencyName) {
         Object wartosc;
-        try{
-            Field pole = currency.conversion_rates.getClass().getDeclaredField(currencyName);
-            pole.setAccessible(true);
-            wartosc = pole.get(currency.conversion_rates);
+        /*Field pole = currency.conversion_rates.getClass().getDeclaredField(currencyName);
+        pole.setAccessible(true);
+        wartosc = pole.get(currency.conversion_rates);*/
 
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+        wartosc = currency.conversion_rates.get(currencyName);
         return (Double) wartosc;
     }
     public Double getNBPRate() {

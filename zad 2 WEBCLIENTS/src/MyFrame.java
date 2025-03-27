@@ -1,15 +1,11 @@
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.web.WebView;
+package zad1;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 public class MyFrame extends JFrame {
     private String country;
@@ -41,13 +37,25 @@ public class MyFrame extends JFrame {
         button1.addActionListener(e -> label.setText("Temperature in the city " + city + " is: "+service.getInfoWeather(city)));
         button3.addActionListener(e -> label.setText("NBP zloty exchange rate to "+ country + ": " + service.getNBPRate()));
         button4.addActionListener(e -> {
+            JFrame wikiFrame = new JFrame();
+            wikiFrame.setSize(600, 600);
+            wikiFrame.setLocationRelativeTo(null);
+
+            JEditorPane webPane = new JEditorPane();
+            webPane.setEditable(false);
+            webPane.setContentType("text/html");
+
+            JScrollPane scrollPane = new JScrollPane(webPane);
+            wikiFrame.add(scrollPane, BorderLayout.CENTER);
+
             try {
-                Desktop.getDesktop().browse(
-                        new java.net.URI("https://pl.wikipedia.org/wiki/"+ city)
-                );
-            } catch (IOException | URISyntaxException ex) {
+                URL url = new URL("https://pl.wikipedia.org/wiki/" + city);
+                webPane.setPage(url);
+            } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
+
+            wikiFrame.setVisible(true);
         });
 
         button2.addActionListener(e -> {
