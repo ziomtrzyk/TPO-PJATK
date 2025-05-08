@@ -8,7 +8,7 @@ public class SimpleClient {
             OutputStream out = socket.getOutputStream();
             InputStream in = socket.getInputStream();
 
-            out.write("Witaj, serwerze!".getBytes());
+            out.write("Asiuolo Ideolo".getBytes());
             byte[] buffer = new byte[1024];
             int bytesRead = in.read(buffer);
             System.out.println("Serwer: " + new String(buffer, 0, bytesRead));
