@@ -18,8 +18,8 @@ public class Main {
     String host = test.remove(0);
     int port = Integer.valueOf(test.remove(0));
     ChatServer s = new ChatServer(host, port);
-    s.startServer();
 
+    s.startServer();
     ExecutorService es = Executors.newCachedThreadPool();
     List<ChatClientTask> ctasks = new ArrayList<>();
 
@@ -32,9 +32,9 @@ public class Main {
       ChatClient c = new ChatClient(host, port, id);
       ChatClientTask ctask = ChatClientTask.create(c, msgs, wait);
       ctasks.add(ctask);
-      //es.execute(ctask);
+      es.execute(ctask);
     }
-    /*ctasks.forEach( task -> {
+    ctasks.forEach( task -> {
       try {
         task.get();
       } catch (InterruptedException | ExecutionException exc) {
@@ -42,11 +42,11 @@ public class Main {
       }
     });
     es.shutdown();
-    s.stopServer();*/
+    s.stopServer();
 
     System.out.println("\n=== Server log ===");
     System.out.println(s.getServerLog());
 
-    //ctasks.forEach(t -> System.out.println(t.getClient().getChatView()));
+    ctasks.forEach(t -> System.out.println(t.getClient().getChatView()));
   }
 }
