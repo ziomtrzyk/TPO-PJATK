@@ -1,4 +1,4 @@
-package com.example.zad4.app.web.rest.api;
+package com.example.zad4.App.Web.REST.API;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
