@@ -4,6 +4,8 @@
  *
  */
 
+package zad1;
+
 
 import java.io.*;
 import java.nio.file.*;
@@ -18,8 +20,8 @@ public class Main {
     String host = test.remove(0);
     int port = Integer.valueOf(test.remove(0));
     ChatServer s = new ChatServer(host, port);
-
     s.startServer();
+
     ExecutorService es = Executors.newCachedThreadPool();
     List<ChatClientTask> ctasks = new ArrayList<>();
 
