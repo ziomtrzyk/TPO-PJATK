@@ -1,0 +1,5 @@
+<th scope="col" th:fragment="sorting(field, label)">
+  <a th:href="@{'/movies?' + ${keyword!=null && keyword!=''? 'keyword=' + keyword + '&' : ''}
+                + ${sortField!=null ? 'sort=' + field + ',' + (sortField == field ? reverseSortDirection : sortDirection) : ''}}">
+    [[${label}]] </a>
+</th>

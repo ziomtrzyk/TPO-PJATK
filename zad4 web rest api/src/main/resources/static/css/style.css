@@ -1,0 +1,31 @@
+.navbar {
+  padding: 0 10px;
+}
+
+.message {
+  position: absolute;
+  top: 40px;
+  right:5px;
+}
+
+.search {
+  position: relative;
+}
+
+.search input {
+  border: 2px solid #ffffff;
+  padding: 6px 12px;
+}
+
+.search input:focus {
+  box-shadow: none;
+  border: 1px solid grey;
+}
+
+.search button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 80px;
+  background: grey;
+}
